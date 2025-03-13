@@ -1,4 +1,4 @@
-import LoaderPage from "@/routes/loader-page"
+import {LoaderPage }from "@/routes/loader-page"
 import { useAuth } from "@clerk/clerk-react"
 import { Navigate } from "react-router-dom"
 

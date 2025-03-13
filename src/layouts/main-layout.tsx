@@ -1,9 +1,9 @@
-import Container from "@/components/container"
-import Footer from "@/components/footer"
+import { Container } from "@/components/container";
+import {Footer }from "@/components/footer"
 import Header from "@/components/header"
 import { Outlet } from "react-router-dom"
 
-const MainLayout = () => {
+export const MainLayout = () => {
   return (
     <div className="flex flex-col h-screen ">
         {/* Handler to store the user data  */}
@@ -13,9 +13,8 @@ const MainLayout = () => {
                 <Outlet/>
              </main>
         </Container>
-        <Footer />
+        <Footer/>
     </div>
   )
 }
 
-export default MainLayout

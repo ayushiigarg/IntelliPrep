@@ -4,7 +4,7 @@ interface ContainerProps{
     children:React.ReactNode;
     className?:string;
 }
-const Container = ({children, className}:ContainerProps) => {
+export const Container = ({children, className}:ContainerProps) => {
   return (
     <div className={cn("container mx-auto px-4 md:px-8 py-4 w-full",className)}>
       {children}
@@ -12,4 +12,3 @@ const Container = ({children, className}:ContainerProps) => {
   )
 }
 
-export default Container
