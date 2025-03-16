@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Linkedin ,Mail} from "lucide-react"; 
+import { Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Container } from "@/components/container";
 import { MainRoutes } from "@/lib/helpers";
@@ -44,7 +44,7 @@ const FooterLink: React.FC<FooterLinkProps> = ({ to, children }) => {
 
 export const Footer = () => {
   return (
-    <div className="w-full bg-black text-gray-300 hover:text-gray-100 py-8">
+    <div className="w-full bg-gray-800 text-gray-300 hover:text-gray-100 py-8">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* First Column: Links */}
@@ -89,14 +89,13 @@ export const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-4">Contact Us</h3>
             <div className="flex gap-4">
- 
               <SocialLink
                 href="https://www.linkedin.com/in/ayushigarg07/"
                 icon={<Linkedin size={24} />}
                 hoverColor="text-blue-700"
               />
               <SocialLink
-                href={`mailto:${import.meta.env.REACT_APP_CONTACT_EMAIL}`}
+                href={`mailto:${import.meta.env.VITE_REACT_APP_CONTACT_EMAIL}`}
                 icon={<Mail size={24} />}
                 hoverColor="text-red-700"
               />
