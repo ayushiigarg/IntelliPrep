@@ -15,11 +15,14 @@ const HomePage = () => {
             <span className="text-outline font-extrabold md:text-8xl">
               AI-Powered
             </span>{" "}
-            <span className="text-gray-500 font-extrabold">Interview Mastery</span>
+            <span className="text-gray-500 font-extrabold">
+              Interview Mastery
+            </span>
           </h2>
 
           <p className="mt-4 text-muted-foreground text-sm">
-            Level up your interview skills with real-time AI insights. Get smarter, faster, and more confident in your job search.
+            Level up your interview skills with real-time AI insights. Get
+            smarter, faster, and more confident in your job search.
           </p>
         </div>
 
@@ -53,12 +56,16 @@ const HomePage = () => {
           <div className="hidden md:block absolute w-80 bottom-4 right-4 px-4 py-2 rounded-md bg-white/60 backdrop-blur-md">
             <h2 className="text-neutral-800 font-semibold">Developer</h2>
             <p className="text-sm text-neutral-500">
-              Unlock your full potential with tailored interview coaching and tips. Prepare like a pro with AI-driven feedback and real-time simulations.
+              Unlock your full potential with tailored interview coaching and
+              tips. Prepare like a pro with AI-driven feedback and real-time
+              simulations.
             </p>
 
-            <Button className="mt-3">
-              Generate <Sparkles />
-            </Button>
+            <Link to={"/generate"} className="w-full">
+              <Button className="w-3/4">
+                Generate <Sparkles className="ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
       </Container>
@@ -80,7 +87,8 @@ const HomePage = () => {
       {/* Rest of the content */}
       <Container className="py-8 space-y-8">
         <h2 className="tracking-wide text-xl text-gray-800 font-semibold">
-          Unleash your potential with personalized AI insights and targeted interview practice.
+          Unleash your potential with personalized AI insights and targeted
+          interview practice.
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
@@ -94,7 +102,9 @@ const HomePage = () => {
 
           <div className="col-span-1 md:col-span-2 gap-8 max-h-96 min-h-96 w-full flex flex-col items-center justify-center text-center">
             <p className="text-center text-muted-foreground">
-              Transform the way you prepare, gain confidence, and boost your chances of landing your dream job. Let AI be your edge in today's competitive job market.
+              Transform the way you prepare, gain confidence, and boost your
+              chances of landing your dream job. Let AI be your edge in today's
+              competitive job market.
             </p>
 
             <Link to={"/generate"} className="w-full">
