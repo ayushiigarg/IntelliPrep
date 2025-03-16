@@ -20,7 +20,6 @@ import { SaveModal } from "./save-modal";
 import {
   addDoc,
   collection,
-  getDoc,
   getDocs,
   query,
   serverTimestamp,

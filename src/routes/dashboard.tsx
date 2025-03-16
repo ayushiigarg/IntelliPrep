@@ -1,65 +1,78 @@
-import { Link } from "react-router-dom"
-import { Headings } from "../components/headings"
-import { Button } from "@/components/ui/button"
-import { Plus, PlusIcon } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
-import { useEffect, useState } from "react"
-import { useAuth } from "@clerk/clerk-react"
-import { Interview } from "@/types"
-import { collection, doc, onSnapshot, query, where } from "firebase/firestore"
-import { db } from "@/config/firebase.config"
-import { toast } from "sonner"
-import { Skeleton } from "@/components/ui/skeleton"
-import { InterviewPin } from "@/components/pin"
+import { Link } from "react-router-dom";
+import { Headings } from "../components/headings";
+import { Button } from "@/components/ui/button";
+import { Plus, PlusIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/clerk-react";
+import { Interview } from "@/types";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "@/config/firebase.config";
+import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
+import { InterviewPin } from "@/components/pin";
 
 export const Dashboard = () => {
-  const [loading, setLoading] =useState(false);
-  const {userId} = useAuth();
-  const [interviews, setInterviews] = useState<Interview[]>([])
-  useEffect(()=>{
+  const [loading, setLoading] = useState(false);
+  const { userId } = useAuth();
+  const [interviews, setInterviews] = useState<Interview[]>([]);
+  useEffect(() => {
     setLoading(true);
-    const interviewQuery = query(collection(db, "interviews"), where("userId", "==", userId));
-    const unsubscribe = onSnapshot(interviewQuery,(snapshot)=>{
-      const interviewList : Interview[] = snapshot.docs.map(doc=>{
-        const id = doc.id;
-        return {
-          id,
-          ...doc.data()
-        }
-      }) as Interview[];
-      setInterviews(interviewList);
-      setLoading(false);
-    },(error)=>{
-      console.log("Error on fetching : ",error);
-      toast.error("Error..",{
-        description : "Something went wrong.. Try again later.."
-      });
-      setLoading(false);
-    })
-    return ()=> unsubscribe();
-  },[userId])
-  
-  return (<>
-  <div className="flex w-full items-center justify-between">
+    const interviewQuery = query(
+      collection(db, "interviews"),
+      where("userId", "==", userId)
+    );
+    const unsubscribe = onSnapshot(
+      interviewQuery,
+      (snapshot) => {
+        const interviewList: Interview[] = snapshot.docs.map((doc) => {
+          const id = doc.id;
+          return {
+            id,
+            ...doc.data(),
+          };
+        }) as Interview[];
+        setInterviews(interviewList);
+        setLoading(false);
+      },
+      (error) => {
+        console.log("Error on fetching : ", error);
+        toast.error("Error..", {
+          description: "Something went wrong.. Try again later..",
+        });
+        setLoading(false);
+      }
+    );
+    return () => unsubscribe();
+  }, [userId]);
 
-    {/* heading*/}
+  return (
+    <>
+      <div className="flex w-full items-center justify-between">
+        {/* heading*/}
 
-    <Headings
-    title="Dashboard"
-    description="Create and start your AI mock interview"
-    />
-    <Link to={"/generate/create"}>
-    <Button size={"sm"}>
-      <PlusIcon/> Create Interview 
-    </Button>
-    </Link>
+        <Headings
+          title="Dashboard"
+          description="Create and start your AI mock interview"
+        />
+        <Link to={"/generate/create"}>
+          <Button size={"sm"}>
+            <PlusIcon /> Create Interview
+          </Button>
+        </Link>
       </div>
-    <Separator className="my-8"/>
-    {/* content section */}
-     <div className="md:grid md:grid-cols-3 gap-3 py-4">
-      {loading?Array.from({length:6}).map((_,index)=>(
-        <Skeleton key={index} className="h-24 md:h-32 rounded-md"/>
-      )):interviews.length>0?interviews.map(interview => <InterviewPin key={interview.id} interview={interview}/>):(
+      <Separator className="my-8" />
+      {/* content section */}
+      <div className="md:grid md:grid-cols-3 gap-3 py-4">
+        {loading ? (
+          Array.from({ length: 6 }).map((_, index) => (
+            <Skeleton key={index} className="h-24 md:h-32 rounded-md" />
+          ))
+        ) : interviews.length > 0 ? (
+          interviews.map((interview) => (
+            <InterviewPin key={interview.id} interview={interview} />
+          ))
+        ) : (
           <div className="md:col-span-3 w-full flex flex-grow items-center justify-center h-96 flex-col">
             <img
               src="/assets/svg/not-found.svg"
@@ -84,8 +97,7 @@ export const Dashboard = () => {
             </Link>
           </div>
         )}
-     </div>
-  </>
-  )
-}
-
+      </div>
+    </>
+  );
+};
