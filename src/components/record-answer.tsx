@@ -71,7 +71,7 @@ export const RecordAnswer = ({
       const aiResult = await generateResult(
         question.question,
         question.answer,
-        userAnswer
+        userAnswer,
       );
       setAiResult(aiResult);
     } else {
@@ -97,7 +97,7 @@ export const RecordAnswer = ({
   const generateResult = async (
     qst: string,
     qstAns: string,
-    userAns: string
+    userAns: string,
   ): Promise<AIResponse> => {
     setIsAiGenerating(true);
     const prompt = `
@@ -110,7 +110,7 @@ export const RecordAnswer = ({
     try {
       const aiResult = await chatSession.sendMessage(prompt);
       const parsedResult: AIResponse = cleanJsonResponse(
-        aiResult.response.text()
+        aiResult.response.text(),
       );
       return parsedResult;
     } catch (error) {
@@ -141,7 +141,7 @@ export const RecordAnswer = ({
       const userAnswerQuery = query(
         collection(db, "userAnswers"),
         where("userId", "==", userId),
-        where("question", "==", currentQuestion)
+        where("question", "==", currentQuestion),
       );
 
       const querySnap = await getDocs(userAnswerQuery);
@@ -252,7 +252,7 @@ export const RecordAnswer = ({
       <div className="w-full mt-4 p-4 border rounded-md bg-gray-50">
         <h2 className="text-lg font-semibold">Your Answer:</h2>
         <p className="text-sm mt-2 text-gray-700 whitespace-normal">
-          {userAnswer || "Start recording to see your ansewer here"}
+          {userAnswer || "Start recording to see your answer here"}
         </p>
         {interimResult && (
           <p className="text-sm text-gray-500 mt-2">
